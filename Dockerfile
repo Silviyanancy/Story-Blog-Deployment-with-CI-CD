@@ -1,6 +1,6 @@
 
 #base image
-FROM node:latest
+FROM node:17-alpine
 
 
 #ENV NODE_ENV development
