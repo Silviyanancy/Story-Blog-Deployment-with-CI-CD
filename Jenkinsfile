@@ -6,9 +6,9 @@ pipeline {
 
    //environment setup for the image
    environment{
-    imageName = "nancysilviya/storyapp" //docker_usrname/any_name
+    imageName = "nancysilviya/storyreactapp" //docker_usrname/any_name
     registryCredential = 'nancysilviya' //for credential
-    dockerImage = '' //hold the instance of the docker image
+    dockerImage = '' //palceholder_hold the instance of the docker image
    }
    stages {
        stage ("Install Dependencies"){
@@ -26,10 +26,11 @@ pipeline {
                sh 'npm test'
            }
        }
+       //It is built on docker whch is already in jenkins container
        stage ("Building Image"){
         steps{
             script{
-                //installed plugins like docker & docker pipeline
+                //installed plugins like docker & docker pipeline will be utilized to build a docker image
                 dockerImage = docker.build imageName
             }
         }
@@ -37,7 +38,7 @@ pipeline {
        stage ("Deploy Image"){
         steps{
             script{
-                //push it to the registry
+                //push it to the github registry
                 docker.withRegistry("https://registry.hub.docker.com", 'dockerhub-creds'){
                     //to increment the number of builds
                     dockerImage.push("${env.BUILD_NUMBER}") //build number of the pipeline will be push with dockerimage
