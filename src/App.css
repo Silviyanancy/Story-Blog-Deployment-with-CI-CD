@@ -26,14 +26,14 @@ a {
   font-size: 25px;
 }
 
-.createPostPage {
+.createStoryPage {
   width: 100%;
   height: calc(100vh - 80px);
   display: grid;
   place-items: center;
 }
 
-.cpContainer {
+.CSContainer {
   width: 500px;
   height: auto;
   padding: 20px;
@@ -44,14 +44,14 @@ a {
   flex-direction: column;
 }
 
-.cpContainer h1 {
+.CSContainer h1 {
   text-align: center;
 }
 
-.cpContainer label {
+.CSContainer label {
   font-size: 25px;
 }
-.cpContainer .inputGp {
+.CSContainer .inputGp {
   margin-top: 30px;
   display: flex;
   flex-direction: column;
@@ -72,7 +72,7 @@ a {
   height: 150px;
 }
 
-.cpContainer button {
+.CSContainer button {
   margin-top: 20px;
   height: 40px;
   border: none;
