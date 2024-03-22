@@ -13,7 +13,7 @@ const Home = ({Auth}) => {
       setStoryList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
     };
     getStorys();
-  },[deleteStory]);
+  },[]);
 
   const deleteStory = async (id) => {
     const storyDoc = doc(db, "storys", id);
