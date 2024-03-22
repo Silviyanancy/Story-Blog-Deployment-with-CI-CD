@@ -10,10 +10,10 @@ const Home = ({Auth}) => {
   useEffect(()=>{
     const getStorys = async () => {
       const data = await getDocs(storysCollection);
-      setStoryList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
+      setStoryList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})));
     };
     getStorys();
-  },[]);
+  },[deleteStory]);
 
   const deleteStory = async (id) => {
     const storyDoc = doc(db, "storys", id);
@@ -44,7 +44,7 @@ const Home = ({Auth}) => {
           <div className='storyTextContainer'>
             {story.storyText}
           </div>
-          <h3>@{story.author.name}</h3>
+         {/** <h3>@{story.author.name}</h3>*/} 
         </div>
         );
       })}      
