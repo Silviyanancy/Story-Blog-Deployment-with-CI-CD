@@ -4,7 +4,7 @@ import { signInWithPopup } from 'firebase/auth';
 //navigation between pages
 import { useNavigate } from 'react-router-dom';
 
-const Login = (setAuth) => {
+const Login = ({setAuth}) => {
   let navigate = useNavigate();
 
 
