@@ -18,7 +18,7 @@ const CreateStory = ({Auth}) => {
     await addDoc(storysCollection, {
       title, 
       story, 
-      author: {name: auth.currentUser.displayName , id: auth.currentUser.uid},
+      author: {name: auth.currentUser.displayName , id: auth.currentUser.uid}
     }); //two args - which collection, 
     navigate("/");
   };
