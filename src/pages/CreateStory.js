@@ -9,11 +9,11 @@ const CreateStory = ({Auth}) => {
   const [story, setStory] = useState("");
 
   const storysCollection = collection(db, "storys");
+  let navigate = useNavigate();
 
   //function that creates/adds the data to the firestore
   const createStory = async () => {
-
-    let navigate = useNavigate();
+    
     //sets the name of the user and id
     await addDoc(storysCollection, {title, 
       story, 
