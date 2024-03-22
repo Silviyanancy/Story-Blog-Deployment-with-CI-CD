@@ -34,7 +34,8 @@ const Home = ({Auth}) => {
              <button 
               onClick={() => {
                 deleteStory(story.id);
-              }}>
+              }}
+              >
                 {""}
                 &#128465;
                 </button>
@@ -44,7 +45,7 @@ const Home = ({Auth}) => {
           <div className='storyTextContainer'>
             {story.storyText}
           </div>
-         {/** <h3>@{story.author.name}</h3>*/} 
+          <h3>@{story.author.name}</h3>
         </div>
         );
       })}      

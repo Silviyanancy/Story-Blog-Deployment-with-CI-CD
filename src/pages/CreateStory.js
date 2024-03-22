@@ -40,7 +40,7 @@ const CreateStory = ({Auth}) => {
           <input placeholder='Title...' 
           onChange={(event) => {
             setTitle(event.target.value);
-          }}></input>
+          }}/>
         </div>
         <div className='inputGp'>
           <label>Story: </label>
