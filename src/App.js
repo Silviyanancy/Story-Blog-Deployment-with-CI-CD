@@ -24,7 +24,8 @@ function App() {
     <Router>
       <nav>
         <Link to="/"> Home </Link>
-        <Link to="/createstory"> CreateStory </Link>
+
+        
         {/*If not authenticated show the login page or logout*/}
         {!Auth ? (
         <Link to="/login"> Login </Link>

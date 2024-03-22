@@ -42,7 +42,7 @@ const Home = ({Auth}) => {
             </div>
           </div>
           <div className='storyTextContainer'>
-            {story.story}
+            {story.storyText}
           </div>
           <h3>@{story.author.name}</h3>
         </div>

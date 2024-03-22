@@ -22,10 +22,10 @@ const Login = ({setAuth}) => {
   return (
     <div className='loginPage'>
       <p>Sign In with Google to Continue Creating a Story</p>
-      <button className='login-with-google-btn'onClick={signinwithGoogle}>Sign in with Google</button>
-      Login
-    </div>
+      <button className='login-with-google-btn'onClick={signinwithGoogle}>
+        Sign in with Google</button>
+      </div>
   );
-};
+}
 
 export default Login;

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateStory = ({Auth}) => {
   const [title, setTitle] = useState("");
-  const [story, setStory] = useState("");
+  const [storyText, setStoryText] = useState("");
 
   const storysCollection = collection(db, "storys");
   let navigate = useNavigate();
@@ -17,8 +17,8 @@ const CreateStory = ({Auth}) => {
     //sets the name of the user and id
     await addDoc(storysCollection, {
       title, 
-      story, 
-      author: {name: auth.currentUser.displayName , id: auth.currentUser.uid}
+      storyText, 
+      author: {name: auth.currentUser.displayName , id: auth.currentUser.uid},
     }); //two args - which collection, 
     navigate("/");
   };
@@ -46,13 +46,13 @@ const CreateStory = ({Auth}) => {
           <label>Story: </label>
           <textarea placeholder='Story..'
           onChange={(event) => {
-            setStory(event.target.value);
+            setStoryText(event.target.value);
           }}/>
         </div>
         <button onClick={createStory}>Submit Story</button>
       </div>
     </div>
-  )
+  );
 }
 
 export default CreateStory;
