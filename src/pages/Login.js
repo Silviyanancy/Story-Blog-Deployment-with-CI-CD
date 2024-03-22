@@ -20,6 +20,7 @@ return (
 <button className="login-with-google-btn" onClick={signInWithGoogle}>
 Sign in with Google
 </button>
+<button> Hello </button>
 </div>
 );
 }
