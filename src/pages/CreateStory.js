@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 //allows to add a document to the table
 import {addDoc, collection} from 'firebase/firestore';
 import {db, auth} from "../firebase-config";
 import { useNavigate } from 'react-router-dom';
 
-const CreateStory = () => {
+const CreateStory = ({Auth}) => {
   const [title, setTitle] = useState("");
   const [story, setStory] = useState("");
 
@@ -21,6 +21,13 @@ const CreateStory = () => {
     }); //two args - which collection, 
     navigate("/");
   };
+
+  //works when opening the page
+  useEffect(() => {
+    if(!Auth){
+      navigate("/login");      
+    }
+  },[]);
 
 
   return (

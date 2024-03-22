@@ -9,7 +9,7 @@ import {auth} from "./firebase-config";
  
 function App() {
   //Firebase Authentication
-  const [Auth, setAuth] = useState(false);
+  const [Auth, setAuth] = useState(localStorage.getItem("Auth"));
 
   //Firebase signout
   const signOutUser = () => {
@@ -26,11 +26,18 @@ function App() {
         <Link to="/"> Home </Link>
         <Link to="/createstory"> CreateStory </Link>
         {/*If not authenticated show the login page or logout*/}
-        {!Auth ? <Link to="/login"> Login </Link> : <button onClick={signOutUser}> Log Out</button>}
+        {!Auth ? (
+        <Link to="/login"> Login </Link>
+        ) : (
+          <>
+          <Link to="/createstory"> Create Story</Link>
+          <button onClick={signOutUser}> Log Out</button>
+          </>
+        )}        
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/createstory" element={<CreateStory />} />
+        <Route path="/" element={<Home Auth={Auth}/>} />
+        <Route path="/createstory" element={<CreateStory Auth={Auth} />} />
         <Route path="/login" element={<Login setAuth={setAuth}/>} />
       </Routes>
     </Router>
