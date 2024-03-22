@@ -144,7 +144,7 @@ textarea {
   padding-top: 20px;
 }
 
-.homePage .post {
+.homePage .story {
   width: 600px;
   height: auto;
   max-height: 600px;
@@ -155,23 +155,23 @@ textarea {
   border-radius: 15px;
 }
 
-.post .postHeader {
+.post .storyHeader {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.postHeader .title {
+.storyHeader .title {
   flex: 50%;
 }
-.postHeader .deletePost {
+.storyHeader .deletePost {
   flex: 50%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.deletePost button {
+.deletestory button {
   border: none;
 
   background: none;
@@ -179,7 +179,7 @@ textarea {
   cursor: pointer;
 }
 
-.post .postTextContainer {
+.story .storyTextContainer {
   word-wrap: break-word;
   height: auto;
   max-height: 400px;

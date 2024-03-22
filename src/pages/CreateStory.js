@@ -15,9 +15,10 @@ const CreateStory = ({Auth}) => {
   const createStory = async () => {
     
     //sets the name of the user and id
-    await addDoc(storysCollection, {title, 
+    await addDoc(storysCollection, {
+      title, 
       story, 
-      author: {name: auth.currentUser.displayName , id: auth.currentUser.uid}
+      author: {name: auth.currentUser.displayName , id: auth.currentUser.uid},
     }); //two args - which collection, 
     navigate("/");
   };
@@ -32,7 +33,6 @@ const CreateStory = ({Auth}) => {
 
   return (
     <div className='createStoryPage'>
-      {""}
       <div className='CSContainer'>
         <h1>Create your Story</h1>
         <div className='inputGp'>
@@ -55,4 +55,4 @@ const CreateStory = ({Auth}) => {
   )
 }
 
-export default CreateStory
+export default CreateStory;

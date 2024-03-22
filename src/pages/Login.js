@@ -7,12 +7,11 @@ import { useNavigate } from 'react-router-dom';
 const Login = ({setAuth}) => {
   let navigate = useNavigate();
 
-
   const signinwithGoogle = () => {
     //Firebase Authentication
     signInWithPopup(auth, provider).then((result) => {
       //local storage login
-      localStorage.setItem("isAuth", true);
+      localStorage.setItem("Auth", true);
       setAuth(true);
       navigate("/");//navigate to home page
     });
@@ -21,12 +20,12 @@ const Login = ({setAuth}) => {
 
 
   return (
-    <div className='loginpage'>
+    <div className='loginPage'>
       <p>Sign In with Google to Continue Creating a Story</p>
       <button className='login-with-google-btn'onClick={signinwithGoogle}>Sign in with Google</button>
       Login
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

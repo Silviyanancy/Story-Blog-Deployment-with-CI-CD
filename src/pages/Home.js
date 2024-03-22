@@ -13,24 +13,24 @@ const Home = ({Auth}) => {
       setStoryList(data.docs.map((doc) => ({...doc.data(), id: doc.id})));
     };
     getStorys();
-  });
+  },[deleteStory]);
 
   const deleteStory = async (id) => {
     const storyDoc = doc(db, "storys", id);
-    await deleteDoc();
+    await deleteDoc(storyDoc);
   };
 
   return (
     <div className='homePage'>
       {storyLists.map((story) => {
         return (
-        <div className='post'>
-          <div className='postHeader'>
+        <div className='story'>
+          <div className='storyHeader'>
             <div className='title'>
               <h1>{story.title}</h1>
             </div>
             <div className='deleteStory'>
-             {Auth && story.author.id === auth.currentUser.uuid && ( 
+             {Auth && story.author.id === auth.currentUser.uid && ( 
              <button 
               onClick={() => {
                 deleteStory(story.id);
@@ -42,16 +42,14 @@ const Home = ({Auth}) => {
             </div>
           </div>
           <div className='storyTextContainer'>
-            {story.storyText}
+            {story.story}
           </div>
           <h3>@{story.author.name}</h3>
         </div>
         );
-      })}
-      
+      })}      
     </div>
-  
-  )
+  );
 }
 
-export default Home
+export default Home;
