@@ -38,3 +38,4 @@ spec:
   - protocol: TCP
     port: 3000 #Service port
     targetPort: 3000 #The port for the React.js application container
+    nodePort: 31110
