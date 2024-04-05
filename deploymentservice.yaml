@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment #The name of the Kubernetes 
+  name: react-app-K8s-deployment #The name of the Kubernetes 
         #Deployment to be created in the Kubernetes cluster
   labels:
-    app: storyreactapp-version1
+    app: storyreactapp
 spec:
   replicas: 2 #The number of pods to be created in the 
    #Kubernetes cluster for the React.js application container
   selector:
     matchLabels:
-      app: storyreactapp-version1
+      app: storyreactapp
   template:
     metadata:
       labels:
-        app: storyreactapp-version1 
+        app: storyreactapp
     spec:
       containers:
-      - name: rstoryreactapp-version1 #The name of the react.js application container
+      - name: storyreactapp-version1 #The name of the react.js application container
         #The Docker image for building the React.js application container
         image: nancysilviya/storyreactapp-version1:latest 
         ports:
@@ -32,7 +32,7 @@ metadata:
   name: service 
 spec:
   selector:
-    app: storyreactapp-version1 
+    app: storyreactapp
   type: LoadBalancer #Type of the Kubernetes Service
   ports:
   - protocol: TCP
