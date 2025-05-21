@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# DevOps Story Blog with CI/CD Pipeline
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack React blog application with Firebase integration, deployed using Jenkins CI/CD, Docker, and Kubernetes.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
+- React frontend with blog functionality
+- Firebase Authentication (Google Sign-In)
+- Firestore database integration
+- Jenkins CI/CD pipeline with Docker builds
+- Kubernetes deployment with Minikube
+- Automated testing and Docker Hub deployment
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Architecture
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+React App → Jenkins Pipeline → Docker Image → Docker Hub → Kubernetes Cluster (Minikube)
+│
+└── Firebase (Auth + Firestore)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Prerequisites
+1. **Node.js v18+**: [Installation Guide](https://github.com/nodesource/distributions)
+2. **Docker**: [Get Docker](https://docs.docker.com/get-docker/)
+3. **Jenkins**: Running in Docker (see [Jenkins Setup](#jenkins-setup))
+4. **Git**: 
+   ```bash
+   sudo apt-get install git-core git-gui
+   ```
+5. SSH Key (Added to GitHub/Docker Hub)
+6. Firebase Account: Sign Up
+7. Minikube (for local Kubernetes): Install Guide
 
-### `npm run build`
+### Setup
+1. Clone Repository & Initialize React
+```bash 
+git clone <repo>
+cd <repo>
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. SSH Key Configuration
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+ssh-keygen -t ed25519 -C <email>
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+```
+Add public key to GitHub SSH Settings and Docker Hub
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Git Configuration
+```bash
+git config --global user.name "username"
+git config --global user.email "useremail"
+```
+Jenkins Pipeline
+1. Run Jenkins in Docker
 
-### `npm run eject`
+```bash
+docker run -d -p 8080:8080 \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v jenkins_home:/var/jenkins_home \
+  --name jenkins_container \
+  nancysilviya/storyapp
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Jenkins Plugins
+Install Docker Pipeline, NodeJS
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. Pipeline Configuration
+- Add Docker Hub credentials in Jenkins
+- Use the provided Jenkinsfile in your repository
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Docker Configuration
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Build & Push Image
 
-## Learn More
+```bash
+docker build -t docker_username/app_name .
+docker push docker_username/app_name
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Firebase Setup
+1. Create a Firebase project and enable.
+   - Authentication (Google Sign-In)
+   - Cloud Firestore (Test mode)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+2. Add Firebase config to src/firebase-config.js
+```bash
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+```
 
-### Code Splitting
+Kubernetes Deployment
+1. Start Minikube
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+minikube start
+```
+2. Create Deployment & Service
+3. Apply configuration
+```bash
+kubectl apply -f deployment.yaml
+```
 
-### Analyzing the Bundle Size
+Usage
+1. Access React app:
+```bash
+minikube service react-service
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Access Jenkins:
+```bash
+docker logs jenkins_container  # Get initial admin password
+http://localhost:8080
+```
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Cleanup
+- Delete Kubernetes resources
+- Stop Jenkins container
+- Remove Docker images
