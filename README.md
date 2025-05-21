@@ -83,3 +83,48 @@ docker build -t docker_username/app_name .
 docker push docker_username/app_name
 ```
 
+Firebase Setup
+1. Create a Firebase project and enable.
+   - Authentication (Google Sign-In)
+   - Cloud Firestore (Test mode)
+
+2. Add Firebase config to src/firebase-config.js
+```bash
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+```
+
+Kubernetes Deployment
+1. Start Minikube
+
+```bash
+minikube start
+```
+2. Create Deployment & Service
+3. Apply configuration
+```bash
+kubectl apply -f deployment.yaml
+```
+
+Usage
+1. Access React app:
+```bash
+minikube service react-service
+```
+
+Access Jenkins:
+```bash
+docker logs jenkins_container  # Get initial admin password
+http://localhost:8080
+```
+
+Cleanup
+- Delete Kubernetes resources
+- Stop Jenkins container
+- Remove Docker images
